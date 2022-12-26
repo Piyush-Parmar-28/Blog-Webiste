@@ -19,6 +19,10 @@ const PostSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        userID: {
+            type: String,
+            required: true,
+        },
         category: {
             type: String,
             required: true,

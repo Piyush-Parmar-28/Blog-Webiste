@@ -4,6 +4,9 @@ const Post = require("../models/Post");
 
 //CREATE POST
 router.post("/", async (req, res) => {
+    console.log("before post: ");
+    console.log(req.body);
+
     const newPost = new Post(req.body);
     try {
         console.log("Post is: ");
@@ -58,7 +61,7 @@ router.delete("/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-});
+})
 
 //GET POST
 router.get("/:id", async (req, res) => {

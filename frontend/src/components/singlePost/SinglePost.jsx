@@ -47,7 +47,7 @@ export default function SinglePost() {
 
     return (
         <div className="singlePost">
-            {/* <p>Newly Created Post</p> */}
+            <p>Newly Created Post</p>
             <div className="singlePostWrapper">
                 {post.photo && (
                     <img src={PF + post.photo} alt="" className="singlePostImg" />
