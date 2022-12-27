@@ -158,4 +158,29 @@ router.post("/dislike", async (req, res) => {
     }
 });
 
+//  ADD COMMENT
+router.post("/addComment", async (req, res) => {
+    const userID = req.body.userID;
+    const postID = req.body.postID;
+    console.log("my userID: "+ userID);
+    console.log("my postID: "+ postID);
+
+    try {
+        const post = await Post.findOne({ _id: postID })
+
+        const comm= {
+            commentValue: req.body.commentValue,
+            userID: req.body.userID
+        };
+        post.comment.push(comm);
+        post.save();
+
+        res.status(200).json(post);
+    } catch (err) {
+        console.log("error at server is: ");
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

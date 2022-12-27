@@ -2,7 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import "./post.css";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
+import Comment from "../comment/Comment"
 import axios from "axios";
+import RecentComment from "../comment/RecentComment";
 
 export default function Post({ post }) {
     const PF = "http://localhost:5000/images/";
@@ -17,9 +19,9 @@ export default function Post({ post }) {
             userID,
             postID
         };
-        
+
         try {
-            const updatedUserData= await axios.post("posts/like", details);
+            const updatedUserData = await axios.post("posts/like", details);
             setCurrentUser(updatedUserData.data)
         } catch (err) {
             console.log("error is: ");
@@ -28,16 +30,16 @@ export default function Post({ post }) {
     };
 
     const handleDisLike = async (postID, userID) => {
-        console.log("postID: "+ postID);
-        console.log("userID: "+ userID);
-        
+        console.log("postID: " + postID);
+        console.log("userID: " + userID);
+
         const details = {
             userID,
             postID
         };
-        
+
         try {
-            const updatedUserData= await axios.post("posts/dislike", details);
+            const updatedUserData = await axios.post("posts/dislike", details);
             setCurrentUser(updatedUserData.data)
         } catch (err) {
             console.log("error is: ");
@@ -64,7 +66,7 @@ export default function Post({ post }) {
 
             <div className="d-flex flex-row">
                 <button type="button" class="btn btn-success" onClick={() => { handleLike(post._id, currentUser._id) }}>Like</button>
-                <button type="button" class="btn btn-danger" onClick={ () => { handleDisLike(post._id, currentUser._id) }}>Dislike</button>
+                <button type="button" class="btn btn-danger" onClick={() => { handleDisLike(post._id, currentUser._id) }}>Dislike</button>
 
                 {
 
@@ -86,6 +88,18 @@ export default function Post({ post }) {
                             </div>
                 }
             </div>
+            <Comment
+                postID={post._id}
+                userID={currentUser._id}
+            />
+
+            {post.comment.map((comment) => (
+                <RecentComment 
+                    author= {post.username}
+                    comm= {comment.commentValue}
+                />
+            ))}
+
         </div>
     );
 }

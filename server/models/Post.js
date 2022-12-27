@@ -27,6 +27,16 @@ const PostSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        comment: [
+            {
+                commentValue:{
+                    type: String
+                },
+                userID: {
+                    type: String
+                }
+            }
+        ]
     },
     { timestamps: true }
 );
