@@ -96,4 +96,66 @@ router.get("/", async (req, res) => {
     }
 });
 
+//  LIKE POST
+router.post("/like", async (req, res) => {
+    const userID = req.body.userID;
+    const postID = req.body.postID;
+    console.log("userID: "+ userID);
+    console.log("postID: "+ postID);
+
+    try {
+        const user = await User.findOne({ _id: userID })
+
+        if (user.Disliked.includes(postID)) 
+        {
+            user.Disliked.splice(user.Disliked.indexOf(postID), 1)
+        }
+
+        if(user.Liked.includes(postID) == false){
+            user.Liked.push(postID)
+        }
+        user.save()
+
+        console.log("Updated User: ")
+        console.log(user);
+
+        res.status(200).json(user);
+    } catch (err) {
+        console.log("error at server is: ");
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+//  DISLIKE POST
+router.post("/dislike", async (req, res) => {
+    const userID = req.body.userID;
+    const postID = req.body.postID;
+    console.log("userID: "+ userID);
+    console.log("postID: "+ postID);
+
+    try {
+        const user = await User.findOne({ _id: userID })
+
+        if (user.Liked.includes(postID)) 
+        {
+            user.Liked.splice(user.Liked.indexOf(postID), 1)
+        }
+
+        if(user.Disliked.includes(postID) == false){
+            user.Disliked.push(postID)
+        }
+        user.save()
+
+        console.log("Updated User: ")
+        console.log(user);
+
+        res.status(200).json(user);
+    } catch (err) {
+        console.log("error at server is: ");
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
