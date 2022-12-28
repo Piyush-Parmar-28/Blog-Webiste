@@ -56,7 +56,7 @@ export default function SinglePost() {
                     <input
                         type="text"
                         value={title}
-                        className="singlePostTitleInput"
+                        className="singlePostTitleInput form-control"
                         autoFocus
                         onChange={(e) => setTitle(e.target.value)}
                     />

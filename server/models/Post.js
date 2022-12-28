@@ -47,4 +47,9 @@ const PostSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+PostSchema.statics.getAllPosts = async () => {
+    const allPosts = await mongoose.model("Post", PostSchema).find();
+    return allPosts;
+};
+
 module.exports = mongoose.model("Post", PostSchema);
