@@ -100,18 +100,24 @@ router.get("/", async (req, res) => {
 router.post("/like", async (req, res) => {
     const userID = req.body.userID;
     const postID = req.body.postID;
-    console.log("userID: "+ userID);
-    console.log("postID: "+ postID);
+    const post = await Post.findOne({ _id: postID })
+    console.log("POst is: ");
+    console.log(post);
+
+    post.likes = post.likes + 1;
+    post.save();
+
+    console.log("userID: " + userID);
+    console.log("postID: " + postID);
 
     try {
         const user = await User.findOne({ _id: userID })
 
-        if (user.Disliked.includes(postID)) 
-        {
+        if (user.Disliked.includes(postID)) {
             user.Disliked.splice(user.Disliked.indexOf(postID), 1)
         }
 
-        if(user.Liked.includes(postID) == false){
+        if (user.Liked.includes(postID) == false) {
             user.Liked.push(postID)
         }
         user.save()
@@ -131,18 +137,21 @@ router.post("/like", async (req, res) => {
 router.post("/dislike", async (req, res) => {
     const userID = req.body.userID;
     const postID = req.body.postID;
-    console.log("userID: "+ userID);
-    console.log("postID: "+ postID);
+    console.log("userID: " + userID);
+    console.log("postID: " + postID);
 
     try {
         const user = await User.findOne({ _id: userID })
+        const post = await Post.findOne({ _id: postID })
 
-        if (user.Liked.includes(postID)) 
-        {
+        post.dislikes = post.dislikes + 1;
+        post.save();
+
+        if (user.Liked.includes(postID)) {
             user.Liked.splice(user.Liked.indexOf(postID), 1)
         }
 
-        if(user.Disliked.includes(postID) == false){
+        if (user.Disliked.includes(postID) == false) {
             user.Disliked.push(postID)
         }
         user.save()
@@ -162,13 +171,13 @@ router.post("/dislike", async (req, res) => {
 router.post("/addComment", async (req, res) => {
     const userID = req.body.userID;
     const postID = req.body.postID;
-    console.log("my userID: "+ userID);
-    console.log("my postID: "+ postID);
+    console.log("my userID: " + userID);
+    console.log("my postID: " + postID);
 
     try {
         const post = await Post.findOne({ _id: postID })
 
-        const comm= {
+        const comm = {
             commentValue: req.body.commentValue,
             userID: req.body.userID
         };
@@ -178,7 +187,7 @@ router.post("/addComment", async (req, res) => {
         const user = await User.findOne({ _id: userID })
         user.comments.push(req.body.commentValue)
         user.save();
-        
+
         res.status(200).json(post);
     } catch (err) {
         console.log("error at server is: ");

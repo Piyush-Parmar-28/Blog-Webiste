@@ -8,6 +8,7 @@ export default function MyPosts({ posts }) {
 
             {posts.map((p) => (
                 <MyPost
+                    key= {p._id}
                     post={p} 
                 />
             ))}

@@ -28,7 +28,7 @@ export default function Comment(props) {
             <div className="mt-3 d-flex flex-row justify-content-around">
                 <textarea name="message" id="message" rows="1" placeholder="Create Comment" required value={commentValue} onChange={handleComment}></textarea>
 
-                <button type="button" class="btn btn-secondary"><i class="bi bi-send" onClick={() => {postComment(props.postID ,props.userID) }}></i></button>
+                <button type="button" className="btn btn-secondary"><i className="bi bi-send" onClick={() => {postComment(props.postID ,props.userID) }}></i></button>
             </div>
         </>
     );

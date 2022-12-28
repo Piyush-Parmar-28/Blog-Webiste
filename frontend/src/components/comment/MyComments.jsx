@@ -7,11 +7,11 @@ const MyComments = (props) => {
         setComments(props.myComments)
     }, []);
 
-    console.log("props Comments are: ");
-    console.log(props.myComments);
+    // console.log("props Comments are: ");
+    // console.log(props.myComments);
 
-    console.log("Comments are: ");
-    console.log(comments);
+    // console.log("Comments are: ");
+    // console.log(comments);
 
     return (
         <div>

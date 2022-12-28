@@ -7,6 +7,8 @@ export default function Write() {
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [category, setCategory] = useState("");
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDisLikes] = useState(0);
     const [file, setFile] = useState(null);
     const { user } = useContext(Context);
 
@@ -19,7 +21,9 @@ export default function Write() {
             userID: user._id,
             title,
             desc,
-            category
+            category,
+            likes,
+            dislikes
         };
 
         if (file) {
@@ -79,6 +83,7 @@ export default function Write() {
                         <b>Add Category</b>
                     </label>
                     <select className="btn btn-secondary" name="category" onChange={e => setCategory(e.target.value)}>
+                        <option value="">Select a category</option>
                         <option value="electronics">Electronics</option>
                         <option value="study">Study</option>
                         <option value="fashion">Fashion</option>

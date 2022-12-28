@@ -1,18 +1,16 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import "./post.css";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
-import Comment from "../comment/Comment"
 import axios from "axios";
-import RecentComment from "../comment/RecentComment";
 
 export default function MyPost({ post }) {
     const PF = "http://localhost:5000/images/";
     const { user, dispatch } = useContext(Context);
     const [currentUser, setCurrentUser] = useState(user);
 
-    console.log("current user: ");
-    console.log(currentUser);
+    // console.log("current user: ");
+    // console.log(currentUser);
 
     const handleLike = async (postID, userID) => {
         const details = {
@@ -30,8 +28,8 @@ export default function MyPost({ post }) {
     };
 
     const handleDisLike = async (postID, userID) => {
-        console.log("postID: " + postID);
-        console.log("userID: " + userID);
+        // console.log("postID: " + postID);
+        // console.log("userID: " + userID);
 
         const details = {
             userID,
@@ -65,26 +63,26 @@ export default function MyPost({ post }) {
             <p className="postDesc">{post.desc}</p>
 
             <div className="d-flex flex-row">
-                <button type="button" class="btn btn-success" onClick={() => { handleLike(post._id, currentUser._id) }}>Like</button>
-                <button type="button" class="btn btn-danger" onClick={() => { handleDisLike(post._id, currentUser._id) }}>Dislike</button>
+                <button type="button" className="btn btn-success" onClick={() => { handleLike(post._id, currentUser._id) }}>Like</button>
+                <button type="button" className="btn btn-danger" onClick={() => { handleDisLike(post._id, currentUser._id) }}>Dislike</button>
 
                 {
 
-                    currentUser.Liked.includes(post._id) == true ?
+                    currentUser.Liked.includes(post._id) === true ?
                         <div>
-                            <i class="bi bi-hand-thumbs-up-fill"></i>
-                            <i class="bi bi-hand-thumbs-down"></i>
+                            <i className="bi bi-hand-thumbs-up-fill"></i>
+                            <i className="bi bi-hand-thumbs-down"></i>
                         </div>
                         :
-                        currentUser.Disliked.includes(post._id) == true ?
+                        currentUser.Disliked.includes(post._id) === true ?
                             <div>
-                                <i class="bi bi-hand-thumbs-up"></i>
-                                <i class="bi bi-hand-thumbs-down-fill"></i>
+                                <i className="bi bi-hand-thumbs-up"></i>
+                                <i className="bi bi-hand-thumbs-down-fill"></i>
                             </div>
                             :
                             <div>
-                                <i class="bi bi-hand-thumbs-up"></i>
-                                <i class="bi bi-hand-thumbs-down"></i>
+                                <i className="bi bi-hand-thumbs-up"></i>
+                                <i className="bi bi-hand-thumbs-down"></i>
                             </div>
                 }
             </div>

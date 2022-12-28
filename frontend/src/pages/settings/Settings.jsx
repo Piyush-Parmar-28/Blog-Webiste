@@ -14,6 +14,8 @@ export default function Settings() {
     const [success, setSuccess] = useState(false);
     const [posts, setMyPosts] = useState([]);
 
+    const { user, dispatch } = useContext(Context);
+
     useEffect(() => {
         const fetchMyPosts = async () => {
             const res = await axios.get("/posts");
@@ -22,7 +24,7 @@ export default function Settings() {
             setMyPosts((Data) => {
                 return (
                     Data.filter((item) => {
-                        return item.userID == user._id;
+                        return item.userID === user._id;
                     }
                     )
                 )
@@ -30,14 +32,13 @@ export default function Settings() {
 
         };
         fetchMyPosts();
-        console.log("My Posts: ");
-        console.log(posts);
-    }, []);
+        // console.log("My Posts: ");
+        // console.log(posts);
+    }, [user._id, posts]);
 
-    const { user, dispatch } = useContext(Context);
     const [currentUser, setCurrentUser] = useState(user);
-    console.log("Current User is: ");
-    console.log(currentUser);
+    // console.log("Current User is: ");
+    // console.log(currentUser);
 
     const PF = "http://localhost:5000/images/"
 
@@ -128,7 +129,7 @@ export default function Settings() {
             />
 
             <MyComments 
-                myComments= {currentUser.comments.length == 0 ? "" : currentUser.comments}
+                myComments= {currentUser.comments.length === 0 ? "" : currentUser.comments}
             />
             
         </div>
