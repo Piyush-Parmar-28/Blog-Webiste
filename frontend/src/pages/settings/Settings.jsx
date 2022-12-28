@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import "./settings.css";
-import Sidebar from "../../components/sidebar/Sidebar";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
-import Posts from "../../components/posts/Posts";
+import MyPosts from "../../components/posts/MyPosts";
+import MyComments from "../../components/comment/MyComments"
 
 export default function Settings() {
     const [file, setFile] = useState(null);
@@ -12,17 +12,17 @@ export default function Settings() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [success, setSuccess] = useState(false);
-    const [posts, setPosts] = useState([]);
+    const [posts, setMyPosts] = useState([]);
 
     useEffect(() => {
         const fetchMyPosts = async () => {
             const res = await axios.get("/posts");
-            setPosts(res.data)
+            setMyPosts(res.data)
 
-            setPosts((Data) => {
+            setMyPosts((Data) => {
                 return (
                     Data.filter((item) => {
-                        return item.userID !== user._id;
+                        return item.userID == user._id;
                     }
                     )
                 )
@@ -35,6 +35,10 @@ export default function Settings() {
     }, []);
 
     const { user, dispatch } = useContext(Context);
+    const [currentUser, setCurrentUser] = useState(user);
+    console.log("Current User is: ");
+    console.log(currentUser);
+
     const PF = "http://localhost:5000/images/"
 
     const handleSubmit = async (e) => {
@@ -118,7 +122,15 @@ export default function Settings() {
                     )}
                 </form>
             </div>
-            <Posts posts={posts} />
+
+            <MyPosts 
+                posts={posts} 
+            />
+
+            <MyComments 
+                myComments= {currentUser.comments.length == 0 ? "" : currentUser.comments}
+            />
+            
         </div>
     );
 }

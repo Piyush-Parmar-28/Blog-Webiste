@@ -175,6 +175,10 @@ router.post("/addComment", async (req, res) => {
         post.comment.push(comm);
         post.save();
 
+        const user = await User.findOne({ _id: userID })
+        user.comments.push(req.body.commentValue)
+        user.save();
+        
         res.status(200).json(post);
     } catch (err) {
         console.log("error at server is: ");

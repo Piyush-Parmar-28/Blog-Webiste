@@ -21,7 +21,8 @@ const UserSchema = new mongoose.Schema(
             default: "",
         },
         Liked: [String],
-        Disliked: [String]
+        Disliked: [String],
+        comments: [String]
     },
     { timestamps: true }
 );
