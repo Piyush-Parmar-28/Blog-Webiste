@@ -1,17 +1,20 @@
 import MyPost from "../post/MyPost";
-import "./posts.css";
+import "./post.css";
 
 export default function MyPosts({ posts }) {
     return (
-        <div className="posts">
-            <p>My Posts</p>
+        <div >
+            <h5 className="postHeading d-flex align-align-items-center justify-content-center">My Posts</h5>
 
-            {posts.map((p) => (
-                <MyPost
-                    key= {p._id}
-                    post={p} 
-                />
-            ))}
+            <div className="posts">
+                {posts.map((p) => (
+                    <MyPost
+                        key={p._id}
+                        post={p}
+                    />
+                ))}
+            </div>
+
         </div>
     );
 }

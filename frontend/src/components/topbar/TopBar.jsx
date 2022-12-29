@@ -11,55 +11,52 @@ export default function TopBar() {
         dispatch({ type: "LOGOUT" });
     };
     return (
-        <div className="top">
-            <div className="topCenter">
-                <ul className="topList">
-                    <li className="topListItem">
-                        <Link className="link" to="/">
-                            HOME
-                        </Link>
-                    </li>
-                    <li className="topListItem">
-                        <Link className="link" to="/">
-                            ABOUT
-                        </Link>
-                    </li>
-                    <li className="topListItem">
-                        <Link className="link" to="/">
-                            CONTACT
-                        </Link>
-                    </li>
-                    <li className="topListItem">
-                        <Link className="link" to="/write">
-                            WRITE
-                        </Link>
-                    </li>
-                    <li className="topListItem" onClick={handleLogout}>
-                        {user && "LOGOUT"}
-                    </li>
-                </ul>
-            </div>
-            <div className="topRight">
-                {user ? (
-                    <Link to="/settings">
-                        <img className="topImg" src={PF + user.profilePic} alt="" />
-                    </Link>
-                ) : (
-                    <ul className="topList">
-                        <li className="topListItem">
-                            <Link className="link" to="/login">
-                                LOGIN
+        <nav class="navbar fixed-top">
+            <div class="container">
+                <a class="navbar-brand">Eazy Blogs</a>
+
+                <div className="d-flex flex-row align-items-center justify-content-center">
+                    <ul className="d-flex flex-row m-0">
+                        <li className="p-2">
+                            <Link className="link" to="/">
+                                HOME
                             </Link>
                         </li>
-                        <li className="topListItem">
-                            <Link className="link" to="/register">
-                                REGISTER
+                        <li className="p-2">
+                            <Link className="link" to="/write">
+                                CREATE
                             </Link>
+                        </li>
+                        <li className="p-2" onClick={handleLogout}>
+                            {user && "LOGOUT"}
                         </li>
                     </ul>
-                )}
-                <i className="topSearchIcon fas fa-search"></i>
+
+                    <div className="p-2">
+                        {user ? (
+                            <Link to="/settings">
+                                <button type="button" class="btn btn-danger">
+                                    <i class="bi bi-person-fill"></i>
+                                </button>
+                            </Link>
+                        ) : (
+                            <ul className="topList">
+                                <li className="topListItem">
+                                    <Link className="link" to="/login">
+                                        LOGIN
+                                    </Link>
+                                </li>
+                                <li className="topListItem">
+                                    <Link className="link" to="/register">
+                                        REGISTER
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+
+                </div>
             </div>
-        </div>
+        </nav>
     );
 }

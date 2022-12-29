@@ -1,0 +1,12 @@
+.commentBox {
+  width: 250px;
+  margin: 0px 25px 40px 25px;
+  padding: 5px;
+  box-shadow: 4px 7px 12px #888888;
+}
+
+.commentTitle {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: lightcoral;
+}

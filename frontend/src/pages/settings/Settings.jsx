@@ -32,14 +32,10 @@ export default function Settings() {
 
         };
         fetchMyPosts();
-        // console.log("My Posts: ");
-        // console.log(posts);
     }, [user._id, posts]);
 
     const [currentUser, setCurrentUser] = useState(user);
-    // console.log("Current User is: ");
-    // console.log(currentUser);
-
+    
     const PF = "http://localhost:5000/images/"
 
     const handleSubmit = async (e) => {
@@ -71,29 +67,12 @@ export default function Settings() {
     };
 
     return (
-        <div className="settings">
+        <div className="settings container">
+            <h5 className="settingsUpdateTitle d-flex justify-content-center align-items-center">Update Your Account</h5>
+
             <div className="settingsWrapper">
-                <div className="settingsTitle">
-                    <span className="settingsUpdateTitle">Update Your Account</span>
-                    <span className="settingsDeleteTitle">Delete Account</span>
-                </div>
-                <form className="settingsForm" onSubmit={handleSubmit}>
-                    <label>Profile Picture</label>
-                    <div className="settingsPP">
-                        <img
-                            src={file ? URL.createObjectURL(file) : PF + user.profilePic}
-                            alt=""
-                        />
-                        <label htmlFor="fileInput">
-                            <i className="settingsPPIcon far fa-user-circle"></i>
-                        </label>
-                        <input
-                            type="file"
-                            id="fileInput"
-                            style={{ display: "none" }}
-                            onChange={(e) => setFile(e.target.files[0])}
-                        />
-                    </div>
+
+                <form className="settingsForm form-control p-3" onSubmit={handleSubmit}>
                     <label>Username</label>
                     <input
                         type="text"
@@ -124,14 +103,13 @@ export default function Settings() {
                 </form>
             </div>
 
-            <MyPosts 
-                posts={posts} 
+            <MyPosts
+                posts={posts}
             />
 
-            <MyComments 
-                myComments= {currentUser.comments.length === 0 ? "" : currentUser.comments}
+            <MyComments
+                myComments={currentUser.comments.length === 0 ? "" : currentUser.comments}
             />
-            
         </div>
     );
 }

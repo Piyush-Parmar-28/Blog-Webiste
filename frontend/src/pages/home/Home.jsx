@@ -20,7 +20,7 @@ export default function Home() {
     return (
         <>
             <Header />
-            <div className="home">
+            <div className="container">
                 <Posts 
                     posts={posts} 
                 />

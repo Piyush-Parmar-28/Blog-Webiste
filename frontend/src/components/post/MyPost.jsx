@@ -9,9 +9,6 @@ export default function MyPost({ post }) {
     const { user, dispatch } = useContext(Context);
     const [currentUser, setCurrentUser] = useState(user);
 
-    // console.log("current user: ");
-    // console.log(currentUser);
-
     const handleLike = async (postID, userID) => {
         const details = {
             userID,
@@ -28,9 +25,7 @@ export default function MyPost({ post }) {
     };
 
     const handleDisLike = async (postID, userID) => {
-        // console.log("postID: " + postID);
-        // console.log("userID: " + userID);
-
+        
         const details = {
             userID,
             postID
@@ -46,46 +41,24 @@ export default function MyPost({ post }) {
     };
 
     return (
-        <div className="post">
-            {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
-            <div className="postInfo">
-                <div className="postCats">
-                    <span className="postCat">{post.category}</span>
-                </div>
-                <Link to={`/post/${post._id}`} className="link">
-                    <span className="postTitle">{post.title}</span>
-                </Link>
-                <hr />
+        <div className="post p-3 form-control">
+
+            <Link to={`/post/${post._id}`} className="link d-flex justify-content-center align-items-center">
+                <span className="postTitle">{post.title}</span>
+            </Link>
+
+            <div className="d-flex justify-content-between">
+                <span className="postCat">{post.category}</span>
+
                 <span className="postDate">
                     {new Date(post.createdAt).toDateString()}
                 </span>
+
             </div>
-            <p className="postDesc">{post.desc}</p>
+            <hr />
 
-            <div className="d-flex flex-row">
-                <button type="button" className="btn btn-success" onClick={() => { handleLike(post._id, currentUser._id) }}>Like</button>
-                <button type="button" className="btn btn-danger" onClick={() => { handleDisLike(post._id, currentUser._id) }}>Dislike</button>
-
-                {
-
-                    currentUser.Liked.includes(post._id) === true ?
-                        <div>
-                            <i className="bi bi-hand-thumbs-up-fill"></i>
-                            <i className="bi bi-hand-thumbs-down"></i>
-                        </div>
-                        :
-                        currentUser.Disliked.includes(post._id) === true ?
-                            <div>
-                                <i className="bi bi-hand-thumbs-up"></i>
-                                <i className="bi bi-hand-thumbs-down-fill"></i>
-                            </div>
-                            :
-                            <div>
-                                <i className="bi bi-hand-thumbs-up"></i>
-                                <i className="bi bi-hand-thumbs-down"></i>
-                            </div>
-                }
-            </div>
+            <p className="postDesc d-flex justify-content-center align-items-center mt-2">{post.desc}</p>
+            <hr />
         </div>
     );
 }
