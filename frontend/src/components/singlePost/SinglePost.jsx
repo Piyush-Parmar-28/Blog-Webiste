@@ -46,12 +46,8 @@ export default function SinglePost() {
     };
 
     return (
-        <div className="singlePost">
-            <p>Newly Created Post</p>
+        <div className="singlePost container mb-5 p-5 form-control">
             <div className="singlePostWrapper">
-                {post.photo && (
-                    <img src={PF + post.photo} alt="" className="singlePostImg" />
-                )}
                 {updateMode ? (
                     <input
                         type="text"

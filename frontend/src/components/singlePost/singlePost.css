@@ -1,12 +1,7 @@
 .singlePost {
-  flex: 9;
-}
-
-.singlePostWrapper {
-  padding: 20px;
-  padding-right: 0;
-  display: flex;
-  flex-direction: column;
+  margin-top: 90px;
+  min-height: 80vh;
+  box-shadow: 4px 7px 12px #888888;
 }
 
 .singlePostImg {
@@ -25,12 +20,8 @@
 
 .singlePostTitleInput {
   margin: 10px;
-  font-family: "Lora", serif;
   font-size: 28px;
-  text-align: center;
-  border: none;
   color: gray;
-  border-bottom: 1px solid lightgray;
 }
 
 .singlePostTitleInput:focus {

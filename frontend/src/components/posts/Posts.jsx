@@ -53,9 +53,6 @@ export default function Posts({ posts }) {
         }
     };
 
-    console.log("Like State array is: ");
-    console.log(likeState);
-
     const handleDisLike = async (postID, userID) => {
         console.log("postID: " + postID);
         console.log("userID: " + userID);
@@ -74,8 +71,8 @@ export default function Posts({ posts }) {
             setAllPosts2(res.data);
             setNumber(number + 1);
 
-            dislikeState.push(p._id)
-            
+            dislikeState.push(postID)
+
             if(likeState.includes(postID)){
                 likeState.splice(likeState.indexOf(postID), 1)
             }
@@ -85,14 +82,9 @@ export default function Posts({ posts }) {
         }
     };
 
-    console.log("effect posts: ");
-    console.log(allPosts);
-
     const getSearchData = async (event) => {
         setSearchData(event.target.value.toLowerCase());
     };
-
-    console.log(searchData);
 
     const getPosts = () => {
         const Data = allPosts2;
@@ -130,12 +122,7 @@ export default function Posts({ posts }) {
             }
         })
 
-        console.log("fp");
-        console.log(filteredPosts);
         setAllPosts(filteredPosts)
-
-        console.log("Sorted post: ");
-        console.log(allPosts);
         setNumber(number + 1)
     }
 
@@ -214,11 +201,6 @@ export default function Posts({ posts }) {
         setNumber(number + 1)
     }
 
-    const updateBtn= ()=>{
-        console.log("Calling func");
-        return "disabled";
-    }
-
     return (
         <div className="posts d-flex flex-column">
             <h4 className="postHeading d-flex justify-content-center align-items-center mt-3">All Posts</h4>
@@ -259,7 +241,7 @@ export default function Posts({ posts }) {
             </div>
 
             {/* Mapping our posts */}
-            <div className="d-flex flex-row">
+            <div className="d-flex flex-row flex-wrap justify-content-evenly">
                 {allPosts.map((p) => (
                     <div className="post p-3 form-control">
                         {
@@ -293,18 +275,8 @@ export default function Posts({ posts }) {
                         </div>
 
                         <CommentBox
-                            postID={p._id}
-                            userID={currentUser._id}
+                            data= {p}
                         />
-
-                        {p.comment.map((comment) => (
-                            <RecentComment
-                                key={comment._id}
-                                author={p.username}
-                                comm={comment.commentValue}
-                            />
-                        ))}
-
                     </div>
                 ))}
             </div>

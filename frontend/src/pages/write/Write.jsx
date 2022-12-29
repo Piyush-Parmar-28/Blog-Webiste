@@ -26,16 +26,6 @@ export default function Write() {
             dislikes
         };
 
-        if (file) {
-            const data = new FormData();
-            const filename = Date.now() + file.name;
-            data.append("name", filename);
-            data.append("file", file);
-            newPost.photo = filename;
-            try {
-                await axios.post("/upload", data);
-            } catch (err) { }
-        }
         try {
             console.log("user is: ", user);
 
@@ -45,43 +35,30 @@ export default function Write() {
     };
 
     return (
-        <div className="write">
-            {file && (
-                <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
-            )}
-            <form className="writeForm" onSubmit={handleSubmit}>
-                <div className="writeFormGroup">
-                    <label htmlFor="fileInput">
-                        <i className="writeIcon fas fa-plus"></i>
-                    </label>
-                    <input
-                        type="file"
-                        id="fileInput"
-                        style={{ display: "none" }}
-                        onChange={(e) => setFile(e.target.files[0])}
-                    />
+        <div className="p-5 mt-5 container upperContainer">
+
+            <form className="p-4 mt-3 form-control writeBox" onSubmit={handleSubmit}>
+                <div className="mt-3">
                     <input
                         type="text"
                         placeholder="Title"
-                        className="writeInput"
+                        className="form-control"
                         autoFocus={true}
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
 
-                <div className="writeFormGroup">
+                <div className="mt-3">
                     <textarea
-                        placeholder="Tell your story..."
+                        placeholder="Tell something..."
                         type="text"
-                        className="writeInput writeText"
+                        rows="5"
+                        className="form-control"
                         onChange={e => setDesc(e.target.value)}
                     ></textarea>
                 </div>
 
-                <div className="mb-3 d-flex flex-column">
-                    <label>
-                        <b>Add Category</b>
-                    </label>
+                <div className="mt-3 mb-3 d-flex flex-row justify-content-between">
                     <select className="btn btn-secondary" name="category" onChange={e => setCategory(e.target.value)}>
                         <option value="">Select a category</option>
                         <option value="electronics">Electronics</option>
@@ -93,11 +70,13 @@ export default function Write() {
                         <option value="toys">Toys</option>
                         <option value="home">Home Decor</option>
                     </select>
+
+                    <button className="btn btn-primary" type="submit">
+                        Publish
+                    </button>
                 </div>
 
-                <button className="writeSubmit" type="submit">
-                    Publish
-                </button>
+
             </form>
         </div>
     );
