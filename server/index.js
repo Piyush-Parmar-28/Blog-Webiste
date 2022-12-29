@@ -13,7 +13,7 @@ dotenv.config();
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
-mongoose.connect("mongodb://localhost:27017/blogApp", {
+mongoose.connect("mongodb+srv://piyush28:piyush94145@cluster0.jhrdy.mongodb.net/EazyBlogs?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,

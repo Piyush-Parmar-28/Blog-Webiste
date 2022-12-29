@@ -35,6 +35,8 @@ export default function Settings() {
     }, [user._id, posts]);
 
     const [currentUser, setCurrentUser] = useState(user);
+    // console.log("Current User  is: ");
+    // console.log(currentUser);
     
     const PF = "http://localhost:5000/images/"
 
@@ -108,7 +110,7 @@ export default function Settings() {
             />
 
             <MyComments
-                myComments={currentUser.comments.length === 0 ? "" : currentUser.comments}
+                myComments={currentUser.comments}
             />
         </div>
     );

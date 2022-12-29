@@ -8,6 +8,10 @@ const MyComments = (props) => {
         setComments(props.myComments)
     }, []);
 
+    // console.log("Comments are: ");
+    // console.log(comments);
+    // console.log(props);
+
     return (
         <div>
             <h5 className='commentTitle d-flex justify-content-center align-items-center'>My Comments</h5>

@@ -6,8 +6,8 @@ import RecentComment from './RecentComment';
 export default function CommentBox(props) {
     const [postData, setPostData] = useState(props.data);
 
-    console.log("Post Data is: ");
-    console.log(postData);
+    // console.log("Post Data is: ");
+    // console.log(postData);
 
     const [commentValue, setCommentValue] = useState("");
 
@@ -16,8 +16,8 @@ export default function CommentBox(props) {
     }
 
     const postComment = async (postID, userID) => {
-        console.log("user ID: " + userID);
-        console.log("post ID: " + postID);
+        // console.log("user ID: " + userID);
+        // console.log("post ID: " + postID);
 
         const commentDetails = {
             userID,
@@ -28,11 +28,11 @@ export default function CommentBox(props) {
         await axios.post("posts/addComment", commentDetails)
         setCommentValue("")
 
-        console.log("Before updating post: ");
-        console.log(postData);
+        // console.log("Before updating post: ");
+        // console.log(postData);
         const updatedPost = await axios.post("posts/getPost", commentDetails)
-        console.log("The updadted post is: ");
-        console.log(updatedPost);
+        // console.log("The updadted post is: ");
+        // console.log(updatedPost);
         setPostData(updatedPost.data)
     }
 
